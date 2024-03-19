@@ -1,0 +1,208 @@
+<html>
+<head>
+  <title>Currency Converter</title>
+
+  <style>
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color:black;
+      background-image:linear-gradient(black,rgba(0, 0, 255, 0.219));
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    
+    .container {
+      width: 400px;
+      height: 450px;
+      padding: 30px;
+      text-align: center;
+      background-color: aquamarine;
+      background-image: linear-gradient(aquamarine,black);
+      border-radius: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+        
+
+    label, select, input, button {
+      width: 100%;
+      box-sizing:border-box;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #575757;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff206e;
+      background-image: linear-gradient(#ff206e,);
+    }
+
+  </style>
+
+  <script type="text/javascript" language="javascript">
+
+    //function to perform currency conversionSSS
+    function convert() {
+      let fromCurrency = document.getElementById("fromCurrency").value;      //here the selection of "from which currency" is to be converted and that input is feeded in the variable
+      let toCurrency = document.getElementById("toCurrency").value;         //here the selection of "to which currency" is to be converted and that input is feeded in the variable 
+      let amount = parseFloat(document.getElementById("amount").value);    //here the amount is entered by user
+
+      //calculate the conversion rate and the amount
+      let conversionRate = getConversionRate(fromCurrency, toCurrency);
+      let convertedAmount = (amount * conversionRate).toFixed(2); //use to round or format number into the decimal value
+
+      document.getElementById("result").value = convertedAmount; ///displaying the converted amount
+    }
+
+    function getConversionRate(fromCurrency, toCurrency) 
+    {
+      const conversionRates =  //this variable is an object having properties which contains conversion rates between different currencies
+      {
+        USD:
+         {  
+          USD: 1,
+          EUR: 0.85,
+          GBP: 0.73,
+          JPY: 149.74,
+          INR: 83.24,
+          CNY: 7.3172,
+          RUB: 94.53
+        },
+
+        EUR: 
+        {
+          USD: 1.18,
+          EUR: 1,
+          GBP: 0.88,
+          JPY: 158.41,
+          INR: 87.9461,
+          CNY: 7.7431,
+          RUB: 99.84
+        },
+
+        GBP: 
+        {
+          USD: 1.37,
+          EUR: 1.13,
+          GBP: 1,
+          JPY: 181.93,
+          INR: 101.0258,
+          CNY: 8.8831,
+          RUB: 114.80
+        },
+
+        JPY:
+         {
+          USD: 0.65,
+          EUR: 0.63,
+          GBP: 0.49,
+          JPY: 1,
+          INR: 0.56,
+          CNY: 0.0489,
+          RUB: 0.63
+        },
+
+        INR: 
+        {
+          USD: 0.0120,
+          EUR: 0.0114,
+          GBP: 0.0099,
+          JPY: 1.8021,
+          INR: 1,
+          CNY: 0.0879,
+          RUB: 1.14
+        },
+
+        CNY: 
+        {
+          USD: 0.1367,
+          EUR: 0.1291,
+          GBP: 0.1126,
+          JPY: 20.4417,
+          INR: 11.3759,
+          CNY: 1,
+          RUB: 12.92
+        },
+
+        RUB: 
+        {
+          USD: 0.0106972,
+          EUR: 0.0101003,
+          GBP: 0.00879900,
+          JPY: 1.60323,
+          INR: 44.4862,
+          CNY: 0.0533256,
+          RUB: 1
+        }
+
+      };
+
+      return conversionRates[fromCurrency][toCurrency];
+    }
+  </script>
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Currency Converter</h1>
+
+    <label for="fromCurrency" >From Currency:</label>  <!--label is used to align  it to the center-->
+    <select id="fromCurrency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+      <option value="INR">INR</option>
+      <option value="RUB">RUB</option>        
+    </select>
+
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" placeholder="Amount" />
+
+    <label for="toCurrency">To Currency:</label>  <!--label is used to align it to the center-->
+    <select id="toCurrency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+      <option value="INR">INR</option>
+      <option value="RUB">RUB</option>
+    </select>
+
+    <label for="result">Converted Amount:</label>
+    <input type="text" id="result" placeholder="Converted Amount" />
+
+    <button onclick="convert()">Convert</button>
+  </div>
+</body>
+</html>
